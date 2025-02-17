@@ -1,0 +1,17 @@
+.boxes {
+    border: 2px solid black;
+    border-radius: 20px;
+    width: 800px;
+    height: 600px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    padding: 10px;
+    background-color: #AED6F1;
+}
+
+
+#wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}

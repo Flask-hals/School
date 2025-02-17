@@ -1,0 +1,9 @@
+.project {
+    border: 2px solid black;
+    border-radius: 20px;
+    text-align: center;
+    background-color: #AED6F1;
+    height: 500px;
+    width: 700px;
+    padding: 20px;
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang='sv'>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='template.css') }}">
+  </head>
+  <body>
+    <header>
+      <h1 id="title">Portfolio</h1>
+      <div class="all_tabs">
+	<a href="/"><button class="button">Home</button></a>
+	<a href="/list"><button class="button">Projects</button></a>
+	<a href="/techniques"><button class="button">Techniques</button></a>
+	<a href="/about"><button class="button">About me</button></a>
+      </div>
+    </header>
+    {% block content %}
+    {% endblock %}
+  </body>
+  <footer>
+    <h3>Contact</h3>
+    <p>abcde123@student.liu.se</p>
+  </footer>
+</html>

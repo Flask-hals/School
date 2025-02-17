@@ -1,0 +1,26 @@
+{% extends "template.html" %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='techniques.css') }}">
+<div id="checkboxes">
+  <h2>Checkboxes</h2>
+
+<form action="/techniques" method="GET">
+  <div id="boxes">
+    {% for technique in techniques %}
+    <input type="checkbox" name="selected_techniques" value="{{ technique }}">
+    <label for="checkbox">{{ technique }}</label><br>
+    {% endfor %}
+  </div>
+  <input type="submit" value="OK" />
+</form>
+</div>
+<div id="all_projects">
+  {% for project in projects %}
+  <div class="projects">
+  <h3><a href="/project">{{ project["project_name"] }}</a></h3>
+  <p>{{ project["short_description"] }}</p>
+  <p>{{ project["small_image"] }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "template.html" %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='list.css') }}">
+<div id="filter">
+  <form action="/list" method="GET">
+    <label for="sort_by">Sort by:</label>
+    <select name="sort_by" id="sortera">
+      <option value="start_date">Project start-date</option>
+      <option value="end_date">Project end-date</option>
+      <option value="group_size">Group size</option>
+      <option value="project_id">Project ID</option>
+    </select>
+
+  <label for="sort_order">Order:</label>
+  <select name="sort_order" id="order">
+    <option value="desc">Descending</option>
+    <option value="asc">Ascending</option>
+  </select>
+  
+  <label for="search_fields_">Search fields:</label>
+  <select name="search_fields" id="fields">
+    <option value="">All fields</option>
+    <option value="project_name">Project name</option>
+    <option value="course_name">Course name</option>
+    <option value="short_description">Short description</option>
+    <option value="long_description">Long description</option>
+  </select>
+
+  <label for="search">Search:</label>
+  <input type="text" name="search_func" id="search_func">
+  
+  <input type="submit" value="OK" />
+  </form>
+</div>
+
+<div id="all_projects">
+  {% for project in projects %}
+  <div class="projects">
+    <h3><a href="/project">{{ project["project_name"] }}</a></h3>
+    <p>{{ project["short_description"] }}</p>
+    <p>{{ project["small_image"] }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "template.html" %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='project.css') }}">
+<div class="project">
+  <h3><a href="/project">{{ latest_project[0]["project_name"] }}</a></h3>
+  <p>{{ latest_project[0]["short_description"] }}</p>
+  <p>{{ latest_project[0]["small_image"] }}</p>
+</div>
+{% endblock %}
