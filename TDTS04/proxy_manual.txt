@@ -1,0 +1,19 @@
+To run this proxy:
+    - Go to settings in your browser and search for proxy.
+    - Switch from "No proxy" to "Manual proxy configuration".
+    - In the "HTTP Proxy" field, type "127.0.0.1", and in the "Port" field, type 8001.
+    - Save changes
+    - In the terminal run the proxy by typing "python3 server.py".
+    - Go to the test sites and open them.
+This proxy works with any HTTP site.
+If the site includes the words "Smiley" or "Stockholm", they will be replaced with "Trolly" and "Linköping".
+
+If you have followed all the steps in the guide above but still don't see any modifications, the site might be cached.
+If the site is cached, the proxy won't make modifications because the data is saved from an earlier visit and therefore wont pass through the proxy.
+
+Most of the work on this proxy has been done from home, therefore most testing has also been done at home.
+However, we have made sure that the proxy works at school as well.
+We have used a lot of prints and wireshark to analyze what the requests, responses, and packets contain.
+
+Because of our regex patterns, we will only replace words if there is a whitespace directly before them or if the word is at the start of the line.
+So, if the word "Smiley" or "Stockholm" is inside another word, it won't be replaced.
