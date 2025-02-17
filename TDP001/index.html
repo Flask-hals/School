@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <title>Blogg</title>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <header>
+      <h1 class="rubrik">Blogg för IP</h1>
+      <nav>
+	<a href="#section1">Uppgift 1</a>
+	<a href="#section2">Uppgift 2</a>
+	<a href="#section3">Uppgift 3</a>
+	<a href="#section4">Uppgift 4</a>
+	<a href="#section5">Slutövning</a>
+      </nav>
+    </header>
+    <main>
+      <div class="box">
+	<section id="section1">
+	<h2 class="underrubrik">Uppgift 1 (gitlab)</h2>
+	<dl>
+	  <dt>New project på gitlab</dt>
+	  <dd>Jag börjar med att skapa ett nytt project på gitlab och döper det till Blogg_TDP001</dd>
+	  <dt>cd /wwwpub/jakno825</dt>
+	  <dd>Vilket flyttar mig till där jag skapat katalogen TDP001 med filerna för bloggen i.</dd>
+	  <dt>ls</dt>
+	  <dd>För att se vilka kataloger som finns.</dd>
+	  <dt>cd</dt>
+	  <dd>För att gå in i katalogen TDP001.</dd>
+	  <dt>git init</dt> 
+	  <dd>För att skapa ett lokalt git repo i katalogen TDP001.</dd>
+	  <dt>ls -a</dt>
+          <dd>För att se vilka kataloger som finns, jag använder flaggan -a för att även se de dolda katalogerna.</dd>
+	  <dt>touch README.md</dt>
+	  <dd>Skapar en README fil</dd>
+	  <dt>emacs README.md</dt>
+	  <dd>För att öppna filen och skriva att projektet används för att lära mig använda git</dd>
+	  <dt>git add .</dt>
+	  <dd>För att lägga till alla filerna med ändringar jag vill commita till git repository.</dd>
+	  <dt>git status</dt>
+	  <dd>För att se att alla filerna har blivit gröna</dd>
+	  <dt>git commit -m "Fixar kursmail 2"</dt>
+	  <dd>För att commita alla ändrade filer, jag använder flaggan -m för att skicka med ett meddelande som förklarar vilka ändringar som har gjorts</dd>
+	  <dt>git remote add origin https:https://gitlab.liu.se/jakno825/blogg_tdp001.git</dt>
+	  <dd>Används för att länka ihop mitt lokala git repo med gitlab repot</dd>
+	  <dt>git push -u origin master</dt>
+	  <dd>För att pusha mina ändrade filer till gitlab repo, jag använder flaggan -u för att koppla ihop det lokala repot och gitlab repot. Vilket gör att nästa gång jag ska pusha så räcker det med "git push".</dd>
+	  <dd>
+	    <p><a href="https://gitlab.liu.se/jakno825/blogg_tdp001.git">Gitlab-projekt</a></p>
+	  </dd>
+	</dl>
+	</section>
+      </div>
+      <div class="box">
+	<section id="section2">
+	<h2 class="underrubrik">Uppgift 2 - Terminalkommandon</h2>
+	<h3>Uppgift 1:</h3>
+	<p>grep "on\b" resultat.txt: Printar alla förnamn eller efternamn som slutar med "on", \b används för att endast kolla så att det man letar efter ("on") är efterföljt av ett tecken som inte tillhör ordet, exempelvis ett mellanslag.</p>
+	<h3>Uppgift 2:</h3>
+	<p>cut -d ' ' -f2 resultat.txt | grep -v son | head -n5: Jag använder mig av både cut, grep och head för att tillsammans kunna få ut de fem första efternamnen som inte slutar på "son". Med cut så delar jag på kolumnerna ifall det är ett mellanslag mellan, och med -f2 så väljer jag enbart den andra kolumnen, det vill säga efternamn. I grep -v son kommandot så används -v för att filtrera bort alla namn som innehåller "son". Och med head -n5 så visas de fem första på listan.</p>
+	<h3>Uppgift 3:</h3>
+	<p>grep an resultat.txt | wc -l: Jag använder mig av grep och wc för att få ut hur många rader i filen som har ett namn innehållande "an". Grep för att filtrera bort alla rader innehållande "an". Och wc för att visa statisk om filen, när jag lägger till flaggan -l så får jag endast fram antalet rader.</p>
+	<h3>Uppgift 4:</h3>
+	<p>Jag hämta dokumentmallen från kurssidan för TDP003. Öppna mallen i emacs och skrev latexmk -xelatex -pvc mall.tex i terminalen för att öppna kompilatorn och se ändringar direkt. Sedan bytte jag ut namnen i sidhuvudet och sidfoten till mitt namn.</p>
+	<a href="TDP003-mall.pdf" target="_blank">Latex PDF</a>
+	  </section>
+	</div>
+      <div class="box">
+	<section id="section3">
+	  <h2 class="underrubrik">Uppgift 3</h2>
+	<h3>Uppgift 1:</h3>
+	<dl>
+	<dt>egrep "[a-z]{4,5}[0-9]{2,3}" filnamn</dt>
+	<dd>Jag använder mig av egrep för att använda regex tillsammans med grep. Mitt regex uttryck letar efter alla små bokstäver mellan a-z och endast då det är fyra eller fem av dessa i följd. Följt av alla siffror två eller tre gånger. Detta uttryck hittar då liu id.n.</dd>
+	</dl>
+	<h3>Uppgift 2:</h3>
+	<dl>
+	<dt>egrep "[0-9]{4}\-[0-9]{2}\-[0-9]{2}" filnamn</dt>
+	<dd>För att hitta datum i en text består mitt regex uttryck av: alla siffror 4 gånger vilket hittar året, följt av ett bindestreck där jag använder backslash för att förtydliga att jag letar efter ett bindestreck eftersom bindestreck kan ha en annan betydelse i regex. Efter bindestrecket letar jag efter månaden i form av två siffror, sedan kommer ett till bindestreck. Efter bindestrecket letar jag efter dagarna i samma form som månaden, två siffror.</dd>
+	</dl>
+	<h3>Uppgift 3:</h3>
+	<dl>
+	<dt>egrep "[0-9]{4}\-(0[1-9]|1[0-2])\-(0[1-9]|1[0-9]|2[0-9]|3[01])"</dt>
+	<dd>Detta är då ett mer utvecklar regex uttryck som ser till att månaderna och dagarna faktiskt finns. Uttrycket för året är detsamma, månaden ser till att ifall månaden börjar på noll så kan följande siffra vara siffrorna mellan ett och nio. Men om månaden börjar på ett så kan följande siffra endast vara ett eller två. För att skapa detta "antingen eller" uttryck använder jag en pipe mellan uttrycken för att förklara att det är antingen eller. Uttrycket för dagarna är uppbygt på samma sätt, börjar dagen med noll så kan följande siffra endast vara siffrorna ett till nio. Ett eller två så kan följande siffra vara vilken som helst. Börjar dagen med tre så kan följande siffra endast vara noll eller ett.</dd>
+	</dl>
+	<h3>Uppgift 4:</h3>
+	<dl>
+	<dt>&lt;([a-z]{1,4})</dt>
+	<dd>För att hitta alla element i html-filen letar jag efter det som börjar med ett mindre/större-än tecken, följt av en till fyra små bokstäver. Eftersom mindre/större-än är utanför parentesen så hittar jag alla element som börjar med mindre/större-än, men printar endast ut det som matchar uttrycket inom parentesen.</dd>
+	</dl>
+	<a href="kursmail4.py">Python program</a>
+	<h3>Uppgift 5:</h3>
+	<p>HTTP requests är kommunikationen mellan användare och server. Denna kommunikation gör det möjligt att exempelvis se sidor på nätet eller skicka filer, exempelvis html-filer för en blogg.<br>GET används för att hämta data, användaren skickar en GET request till servern och får tillbaka koden för sidan som gör det möjligt för användaren att se sidan.<br>POST används för att skicka data till en server, exempelvis html-filer för en blogg.<br>För att interagera med min blogg används alltså POST, då POST används för att förändra sidor medans GET endast visar sidor.</p>
+	</section>
+      </div>
+      <div class="box">
+	<section id="section4">
+	<h2 class="underrubrik">Uppgift 4</h2>
+	<h3>Uppgift 1:</h3>
+	<dl>
+	<dt>find / "*.py" -executable -exec grep -H '#! /usr/bin/env python3' {} \;</dt>
+	<dd>Jag använder find funktionen för att söka efter filer, sökvägen sätter jag till / för att söka igenom hela datorn. Argumentet för vad jag söker efter är är inom dubbla citatecken, jag letar efter alla filer som slutar på .py. * före .py berättar att det är okej att det står text innan .py. Sedan använder jag flaggan -executable för att endast matcha de filer som är körbara för mig. Flaggan -exec används för att jag ska kunna kombinera find med andra metoder, i detta fall grep funktionen. Grep letar igenom alla matchningar efter argumentet inom enkla citatecken, jag valde enkla citatecken just för att dom säger att argumentet ska se ut precis som argumentet är skrivet. Flaggan -H gör att när filer som matchar hittas skrivs detta ut i terminalen, utan -H står det i princip bara mitt grep uttryck flera gånger. {} används som en sorts behållare, alla filer jag hittar med find sparas i behållaren så grep funktionen kan utföras på dessa filer. \; avslutar -exec.</dd>
+	</dl>
+	<h3>Uppgift 2:</h3>
+	<dl>
+	<dt>find ~ -size +5M</dt>
+	<dd>Sökvägen ~ representerar hemkatalogen. Flaggan -size gör att jag endast matchar med filer som uppfyller size argumentet, vilket i detta fall är +5M. Argumentet berättar att jag endast letar efter de filer som är större än 5Megabyte.</dd>
+	</dl>
+	<h3>Uppgift 3:</h3>
+	<dl>
+	  <dt>Ctrl +x, (, ctrl + x, ), ctrl + e</dt>
+	<dd>Control + x sedan (: För att börja spela in mitt macro. Jag ställer mig vid första bokstaven på första raden och går igenom till precis efter efternamnet. Sedan raderar jag allt efter efternamnet. Jag går ett steg till höger och hamnar på första bokstaven av namnet på rad två. Control + x sedan ): För att avsluta macrot. Jag återställer filen och ställer mig i början igen. Control + e för att utföra macrot, sedan fortsätter jag trycka endast e tills dess att allt förutom namnen är raderade.</dd>
+	</dl>
+	</section>
+      </div>
+      <div class="box">
+	<section id="section5">
+	<h2 class="underrubrik">Slutövning</h2>
+	<h3>2.1 Kataloger och filer:</h3>
+	<dl>
+	<dt>mkdir -p ~/TDP004/lab1</dt>
+	<dd>Mkdir används för att skapa en katalog. Jag använder flaggan -p för att skapa alla mellanliggande kataloger. Detta gör att jag kan skapa katalogerna TDP004 innehållande lab1 i ett enda kommando.</dd>
+	<dt>cd /TDP004</dt>
+	<dd>cd(change directory) används för att förflytta sig mellan kataloger. I detta fall använder jag sökvägen /TDP004 för att förflytta mig till katalogen.</dd>
+	<dt>touch README.md</dt>
+	<dd>touch används för att skapa en ny fil, efter touch skriver man vad filen ska heta. I detta fall döper jag filen till README.md</dd>
+	<dt>cat > README.md</dt>
+	<dd>För att skriva i filen endast via terminalen använder jag mig av detta kommando. Cat läser av filen och visar innehåller, jag använder mig av > för att visa att cat ska ta input och lägga till i filen instället för att lista innehållet, jag avslutar inputen med ctrl + d.</dd>
+	<dt>Skapar ett git repo på gitlab med namnet Slutövning</dt>
+	<dt>git init</dt>
+	<dd>git init skapar ett lokalt git repo.</dd>
+	<dt>git remote add origin git@gitlab.liu.se:jakno825/slutoevning.git</dt>
+	<dd>Kommandot kopplar ihop mitt lokala git repo med det på gitlab.</dd>
+	<dt>git add .</dt>
+	<dd>Jag lägger till alla ändrade filer. Punkten gör att jag tar med allt ändrat.</dd>
+	<dt>git status</dt>
+	<dd>För att se att allt kommit med.</dd>
+	<dt>git commit -am "Slutövning"</dt>
+	<dd>Commitar alla ändrade filer och skickar med ett meddelande.</dd>
+	<dt>git push -u origin master</dt>
+	<dd>För att pusha filerna till mitt gitlab repo. Flaggan -u används för att koppla samman mitt lokala repo till gitlab repot, vilket gör att jag i framtiden endast behöver skriva git push.</dd>
+	</dl>
+	<h3>2.2 Jobba via ssh</h3>
+	<dl>
+	<dt>ssh jakno825@ssh.edu.liu.se</dt>
+	<dd>För att koppla upp mig via ssh.</dd>
+	<dt>mkdir TDP004</dt>
+	<dd>Skapar katalogen TDP004.</dd>
+	<dt>ls</dt>
+	<dd>ls används för att lista filer eller kataloger. Vilket jag använder för att se att katalogen lagts till.</dd>
+	<dt>cd TDP004</dt>
+	<dd></dd>
+	<dt>git init</dt>
+	<dd></dd>
+	<dt>git remote add origin git@gitlab.liu.se:jakno825@slutoevning.git</dt>
+	<dd></dd>
+	<dt>git pull</dt>
+	<dd>För att dra ner alla ändrade/tillagda filer, fick dock ett felmeddelande om att något med min branch var fel.</dd>
+	<dt>git checkout master</dt>
+	<dd>För att byta min branch till master.</dd>
+	<dt>git pull</dt>
+	<dd></dd>
+	<dt>ls</dt>
+	<dd></dd>
+	<dt>mkdir -p lab2/documentation</dt>
+	<dd>Nu börjar jag inte lab2 med /, / används för att visa att katalogerna startar från root katalogen. Nu vill jag börja i den katalog jag befinner mig i.</dd>
+	<dt>cd lab1</dt>
+	<dd></dd>
+	<dt>touch lab1.cc</dt>
+	<dd></dd>
+	<dt>touch lab2.cc lab2.h</dt>
+	<dd></dd>
+	<dt>mv lab2.cc lab2.h ~/TDP004/lab2</dt>
+	<dd>mv anänvds för att flytta filer eller kataloger. När jag säger vart filerna ska flyttas inleder jag med ~ för att visa att sökvägen börjar i hemkatalogen.</dd>
+	<dt>cd ../lab2</dt>
+	<dd>.. används för att markera till överliggande katalog.</dd>
+	<dt>ls</dt>
+	<dd></dd>
+	<dt>cd ..</dt>
+	<dd></dd>
+	<dt>emacs README.md</dt>
+	<dd>Ändrar innehållet i README.md</dd>
+	<dt>touch junk.temp</dt>
+	<dd></dd>
+	<dt>touch .gitignore</dt>
+	<dd></dd>
+	<dt>emacs .gitignore</dt>
+	<dd>Här lägger jag till *~ och *.temp, * används för att visa att det får stå något innan det jag vill ignorera. I detta fall ignorerar jag alla filer som slutar med ~ och .temp.</dd>
+	<dt>git add README.md lab1/lab1.cc lab2/</dt>
+	<dd></dd>
+	<dt>git commit -am "2.2"</dt>
+	<dd></dd>
+	<dt>git push</dt>
+	<dd></dd>
+	</dl>
+	<h3>2.3 Lösa en konflikt</h3>
+	<dl>
+	<dt>cat > README.md</dt>
+	<dd>Skriver något.</dd>
+	<dt>git pull</dt>
+	<dd></dd>
+	<dt>git commit -am "Konflikt"</dt>
+	<dd>Det stod i terminalen att jag var tvungen att commita mina ändringar.</dd>
+	<dt>git config pull.rebase false</dt>
+	<dd>Tips av terminalen, kommandot används för att välja att mergea de ändrade filerna vid nästa pull.</dd>
+	<dt>git pull</dt>
+	<dd></dd>
+	</dl>
+	<h3>2.4 Rättiheter och skriva till fil</h3>
+	<dl>
+	  <dt>touch test.py</dt>
+	  <dd></dd>
+	  <dt>ls -l</dt>
+	  <dd>När jag använder ls med flaggan -l får jag mer information än endast filnamn. Nu får jag information om rättigheter, ägare och grupper för filen.</dd>
+	  <dt>chmod +x test.py</dt>
+	  <dd>chmod används för att ändra rättigheterna för en fil eller en katalog. + visar att jag vill lägga till en rättighet. Jag lägger till execute för att kunna köra filen som ett program.</dd>
+	  <dt>./test.py</dt>
+	  <dd></dd>
+	  <dt>echo "# Detta är en kommentar som skapats med echo" >> test.py</dt>
+	  <dd>echo används vanligtvis för att skriva ut text i terminalen men med hjälp av >> säger jag att texten ska läggas till i filen test.py istället. Texten inom citattecken är det jag vill lägga till.</dd>
+	  <dt>cat test.py</dt>
+	  <dd></dd>
+	  <dt>cp -r lab2 lab3</dt>
+	  <dd>cp används för att kopiera en fil eller katalog. Jag använder flaggan -r för att ta med alla underliggande filer.</dd>
+	  <dt>cd lab3</dt>
+	  <dd></dd>
+	  <dt>ls</dt>
+	  <dd></dd>
+	  <dt>mv lab2.cc lab3.cc</dt>
+	  <dd>mv kan även användas för att byta namn på filen.</dd>
+	  <dt>mv lab2.h lab3.h</dt>
+	  <dd></dd>
+	  <dt>ls</dt>
+	  <dd></dd>
+	  <dt>ssh jakno825@ssh.edu.liu.se</dt>
+	  <dd></dd>
+	  <dt>cd TDP004</dt>
+	  <dd></dd>
+	  <dt>cp -r lab1 lab4</dt>
+	  <dd></dd>
+	  <dt>cd lab4</dt>
+	  <dd></dd>
+	  <dt>mv lab1.cc lab4.cc</dt>
+	  <dd></dd>
+	  <dt>git add lab4/</dt>
+	  <dd></dd>
+	  <dt>git commit -am "2.4"</dt>
+	  <dd></dd>
+	  <dt>git push</dt>
+	  <dd></dd>
+	  <dt>exit</dt>
+	  <dd>För att stänga av ssh kopplingen.</dd>
+	  <dt>git add README.md lab3/ test.py</dt>
+	  <dd></dd>
+	  <dt>git pull</dt>
+	  <dd></dd>
+	  <dt>git push</dt>
+	  <dd></dd>
+	</dl>
+	<h3>2.5 Dokumentera katalogen</h3>
+	<dl>
+	  <dt>cd</dt>
+	  <dd></dd>
+	  <dt>sudo apt install tree</dt>
+	  <dd>apt används för pakethantering såsom installationer, install är en instruktion till apt att det som skickas med ska installeras. I detta fall skickar jag med tree som är ett program som skapar trä strukturer av kataloger.</dd>
+	  <dt>cd /TDP004</dt>
+	  <dd></dd>
+	  <dt>tree</dt>
+	  <dd>För att testa tree funktionen.</dd>
+	  <dt>tree README.md</dt>
+	  <dd>Istället för att visa trästrukturen säger jag att den ska skickas in i filen README.md</dd>
+	  <dt>cat README.md</dt>
+	  <dd></dd>
+	  <dt>git add README.md</dt>
+	  <dd></dd>
+	  <dt>git commit -am "2.5"</dt>
+	  <dd></dd>
+	  <dt>git push</dt>
+	  <dd></dd>
+	</dl>
+	<h3>2.6 Smått och gott</h3>
+	<dl>
+	  <dt>find ~ -executable</dt>
+	  <dd>find används för att söka efter filer och kataloger. ~ tecknet representerar min hemkatalog och säger att det är där find ska söka efter filer. Flaggan -executable säger att find endast ska söka efter de filer som är körbara.</dd>
+	  <dt>find ~ "*.py" -executable -exec grep -H '#! /usr/bin/env python3' {} \;</dt>
+	  <dd>Nu letar jag endast efter python filer ("*.py") som är körbara (-executable). För att veta om filerna innehåller #! /usr/bin/env python3 vilket gör dom körbara som ett program, använder jag flaggan -exec för att kombinera find med metoden grep som letar igenom filerna efter argumentet. Flaggan -H gör att när en fil innehåller argumentet skrivs den ut i terminalen. {} dessa måsvingar används som en behållare som sparar de filerna som matchat med find och -executable så grep kan leta igenom dem. \; avslutar -exec.</dd>
+	  <dt>grep '^#' ~/*</dt>
+	  <dd>grep letar igenom alla filer efter det inmatade argumentet som jag har inom citattecken. Eftersom alla kommentarer i python börjar med # så sätter jag ^ innan vilket innebär att grep endast kommer matcha med rader som börjar med #. ~ är sökvägen där jag börjar min sökning, /* betyder att grep ska söka i alla filer som ligger direkt under min hemkatalog men inte djupare.</dd>
+	</dl>
+	<h3>2.7 Lite Bashprogrammering</h3>
+	<dl>
+	  <dt>touch bashprog.sh</dt>
+	  <dt>chmod +x bashprog.sh</dt>
+	  <dd>Hade inte kör rättigheter</dd>
+	 </dl>
+	  <p><a href="bashprog.sh.txt" target="_blank">Bashprogrammering</a></p>
+	</section>
+      </div>
+      <div id="footer">
+	<span>Jakob Norberg</span>
+	<span><a href="mailto:jakno825@student.liu.se">jakno825@student.liu.se</a></span>
+      </div>
+    </main>
+  </body>
+ </html>
