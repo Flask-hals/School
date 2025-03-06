@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<football>
+    <league name="Premier League">
+        <team name="Manchester United">
+            <player id="1">
+                <name>Marcus Rashford</name>
+                <position>Forward</position>
+                <goals>10</goals>
+                <assists>5</assists>
+            </player>
+            <player id="2">
+                <name>Bruno Fernandes</name>
+                <position>Midfielder</position>
+                <goals>8</goals>
+                <assists>12</assists>
+            </player>
+            <player id="3">
+                <name>Raphael Varane</name>
+                <position>Defender</position>
+                <goals>2</goals>
+                <assists>1</assists>
+            </player>
+        </team>
+        <team name="Liverpool">
+            <player id="4">
+                <name>Mohamed Salah</name>
+                <position>Forward</position>
+                <goals>15</goals>
+                <assists>8</assists>
+            </player>
+            <player id="5">
+                <name>Virgil van Dijk</name>
+                <position>Defender</position>
+                <goals>3</goals>
+                <assists>2</assists>
+            </player>
+            <player id="6">
+                <name>Trent Alexander-Arnold</name>
+                <position>Defender</position>
+                <goals>2</goals>
+                <assists>10</assists>
+            </player>
+        </team>
+    </league>
+    <league name="La Liga">
+        <team name="Real Madrid">
+            <player id="7">
+                <name>Karim Benzema</name>
+                <position>Forward</position>
+                <goals>20</goals>
+                <assists>7</assists>
+            </player>
+            <player id="8">
+                <name>Luka Modric</name>
+                <position>Midfielder</position>
+                <goals>5</goals>
+                <assists>9</assists>
+            </player>
+            <player id="9">
+                <name>David Alaba</name>
+                <position>Defender</position>
+                <goals>4</goals>
+                <assists>3</assists>
+            </player>
+        </team>
+        <team name="Barcelona">
+            <player id="10">
+                <name>Robert Lewandowski</name>
+                <position>Forward</position>
+                <goals>18</goals>
+                <assists>6</assists>
+            </player>
+            <player id="11">
+                <name>Pedri</name>
+                <position>Midfielder</position>
+                <goals>4</goals>
+                <assists>5</assists>
+            </player>
+            <player id="12">
+                <name>Jules Koundé</name>
+                <position>Defender</position>
+                <goals>1</goals>
+                <assists>2</assists>
+            </player>
+        </team>
+    </league>
+</football>
+Syfte:
+Den här XML-filen är utformad för att testa studenters förmåga att analysera strukturerad data genom DOM-parsning. 
+Fokus ligger på att navigera i dokumentträdet och extrahera specifik information.
+
+DOM-parsning läser in hela XML-strukturen i minnet, vilket gör det enklare att navigera och modifiera dokumentet.
+Denna uppgift hjälper studenter att förstå hur man traverserar XML-trädet, söker efter specifika noder och extraherar data på ett effektivt sätt.
+
+Uppgiftbeskriving:
+Du ska gå igenom XML filen och kunna ta fram ett lag från varje leauge och sedan få fram deras spelares stats.

@@ -1,0 +1,69 @@
+<!-- 
+    Hitta alla Samsung och iPhone telefoner som är av en version 
+    högre än 8, men samtidigt kostar mindre än 10000. Detta ska göras med en DOM-parser.
+
+    X == version 10
+
+    Skriv ut alla alternativ av telefoner du kan köpa i terminalen (ha med information som
+    pris, versions nummer samt namn). 
+
+    Reflektion:
+    Denna uppgift är bra då man får träna på att hantera och hämta data med XPath.
+    Eftersom att man måste jämföra två egenskaper (specifikt strings som representerar ints)
+    lär man sig att ta ut data från XPath matchningar. 
+-->
+
+<?xml version="1.0" encoding="windows-1252"?>
+<product name="phones">
+    <phone name="iPhone">
+        <item id="1" price="2000" version="6">iPhone 6</item>
+        <item id="2" price="20000" version="15">iPhone 15</item>
+        <item id="3" price="15000" version="11">iPhone 11</item>
+        <item id="4" price="8000" version="X">iPhone X</item>
+    </phone>
+    <phone name="Android">
+        <type name="Samsung">
+            <item id=="1" price="3000" version="9">Samsung 9.1</item>
+            <item id=="1.1" price="10001" version="7">Samsung 7.1</item>
+            <item id=="2" price="10000" version="8">Samsung 8</item>
+            <item id=="3" price="9999" version="7">Samsung 7</item>
+            <item id=="4" price="10000" version="9">Samsung 9</item>
+            <item id=="5" price="9999" version="8">Samsung 8.1</item>
+        </type>
+        <type name="Huawei">
+            <item id=="iprice"="3000" version="9">Huawei 9.1</item>
+            <item id=="1.1" price="10001" version="7">Huawei 7.1</item>
+            <item id=="2" price="10000" version="8">Huawei 8</item>
+            <item id=="3" price="9999" version="7">Huawei 7</item>
+            <item id=="4" price="10000" version="9">Huawei 9</item>
+            <item id=="5" price="9999" version="8">Huawei 8.1</item>
+        </type>
+    </phone>
+</product>
+
+<product name="computers">
+    <computer name="Mac">
+        <item id="1" price="2000" version="6">Mac</item>
+        <item id="2" price="20000" version="15">Mac</item>
+        <item id="3" price="15000" version="11">Mac 11</item>
+        <item id="4" price="8000" version="X">Mac X</item>
+    </computer>
+    <computer name="Windows">
+        <type name="Asus">
+            <item id=="1" price="3000" version="9">Asus 9.1</item>
+            <item id=="1.1" price="10001" version="7">Asus 7.1</item>
+            <item id=="2" price="10000" version="8">Asus 8</item>
+            <item id=="3" price="9999" version="7">Asus 7</item>
+            <item id=="4" price="10000" version="9">Asus 9</item>
+            <item id=="5" price="9999" version="8">Asus 8.1</item>
+        </type>
+        <type name="LG">
+            <item id=="1" price="3000" version="9">LG 9.1</item>
+            <item id=="1.1" price="10001" version="7">LG 7.1</item>
+            <item id=="2" price="10000" version="8">LG 8</item>
+            <item id=="3" price="9999" version="7">LG 7</item>
+            <item id=="4" price="10000" version="9">LG 9</item>
+            <item id=="5" price="9999" version="8">LG 8.1</item>
+        </type>
+    </computer>
+</product>

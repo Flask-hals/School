@@ -1,0 +1,46 @@
+Reflektioner kring hur det är att lära sig ett nytt språk (Ruby):
+-Hur har ni gått tillväga för att lära er Ruby?
+Vi testar oss fram, vi vet vad vi behöver komma fram till för resultat och letar därefter tillvägagångssätt på ruby doc eller liknande. Och testar sedan dessa. 
+
+-Vilka fel och misstag har ni gjort under tiden?
+Vi spenderade onödigt långt tid på regex uppgiften då vi misstog att match metoden för strängar inte returnerar alla hittade matchningar.
+
+-Vad finns det för nya konstruktioner i Ruby som ni inte sett förut?
+Symboler, block, bygga ut existerande klasser.
+
+-Vad finns det för konstruktioner som ni känner igen men som ser lite annorlunda ut?
+Syntax, metoder, if-satser och liknande, konstruktorer för klasser är alla konstruktioner som är bekanta.
+
+-Finns det något som ni irriterar er på eller tycker om i Ruby?
+Lös syntax och dynamisk typning gör att fel blir svårare att detektera samt 
+att kod strukturen inte blir lika konsekvent.
+Lös syntax gör det samtidigt enklare att sätta sig in i språket och komma igång.
+
+Reflektioner kring de olika tekniker som ni stöter på:
+- Hur användbart verkar detta vara?
+Block känns väldigt användbart, om man jämför med när man började med lambda i python så känns block mycket enklare att förstå hur de fungerar och hur man använder dem.
+Regex verkar som ett väldigt kraftfullt verktyg för att matcha saker.
+
+- Hur lätt/svårt är det att sätta sig in i?
+Än sålänge känns det hyfsat lätt, främst tack vare att allt känns väldigt löst. Man kan göra på många olika sätt.
+
+- Har ni hittat alternativa källor för att ta reda på nya saker? 
+Inga förutom stackoverflow och några bloggar som förklarar enklare koncept i ruby.
+
+Dokumentation av hur ni har tänkt när ni arbetat fram era lösningar:
+- Vad arbetade ni med (i grova drag) vid varje labbpass?
+labbpass1- Iteratorer, block, regex, utökning av existerande klasser.
+labbpass2- Läsa in externa filer, lite regex, läsa in kommandoradsargument, felhantering.
+
+- Hur har ni tolkat uppgiften?
+Uppgift 6 med regnummer så har vi tagit med både gamla och nya regnummer, det står att man ska leta efter svenska men inget om hurvida man ska leta efter de nya.
+I uppgift 4 kallade vi på Arrays egna rotate metod för att lösa uppgiften. I början tänkte vi göra en for-loop som tog bort elementen i början och lade till dem i slutet.
+Men när vi hittade rotate metoden så kändes det bara simplare att använda den som redan fanns.
+I uppgift 7 tolkade vi att vi inte behövde skapa egna tester då den som utför uppgiften antagligen inte gör uppgiften precis som lösningsförslaget vilket gör att testerna inte hade funkat för alla fallen.
+Samt att vi antar att den som utför uppgiften skapar egna tester för att testa koden.
+
+- Vad var svårt eller lätt med uppgiften? 
+Det svåraste var regex i uppgift 5. Egentligen var det inte så svårt, det var bara att vi fastnade på hur vi skulle gå tillväga.
+Det var också lite krångligt att skriva bra tester för alla uppgifter, speciellt de enklare uppgifterna.
+
+-Titlar 700-tecken

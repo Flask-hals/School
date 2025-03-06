@@ -1,0 +1,21 @@
+﻿Utvecklingsblogg - seminarie 2
+
+
+Denna laboration fokuserade på att hantera text genom reguljära uttryck och XML-parsning. 
+
+I den första uppgiften arbetade vi med att två textfiler, football.txt och weather.txt. 
+Vi behövde extrahera information från filerna för att hitta laget/dagen med minst skillnad, samt sortera datan efter skillnad i mål/temperatur. 
+För att testa våra reguljära uttryck använde vi Rubular, vilket var väldigt användbart eftersom vi direkt kunde se om uttrycken matchade rätt delar av texten. En lärdom var exempelvis att \s* ibland var mer robust än \s+, beroende på hur whitespace hanterades i filerna. 
+När vi löste uppgiften använde vi oss av File.read för att läsa in textfilerna, Regex för att extrahera relevant information och metoder för att hantera data, tex hitta minsta skillnad och sortera listor. Samt unit testing för att verifiera att resultaten var korrekta. 
+
+I uppgift 2 så lärde vi oss att använda XML-parsning för att läsa in och analysera events.html, där händelser var strukturerade med microformats i element som <div class = “vevent”>.
+Det första problemet vi stötte på var att läsa in HTML-filen korrekt. När vi sparade filen direkt från en webblänk blev den felaktigt formaterad, vilket gjorde att vår XML-parser inte kunde hantera den. Vi löste dock detta genom att istället använda “wget” i terminalen och då fungerade det som förväntat.
+Vi löste uppgiften genom att använda REXML::Document för att ladda in filen som ett XML-dokument och sedan XPath-sökningar för att extrahera information som “summary” och “description”. 
+
+I den tredje uppgiften var den största utmaningen här var egentligen att hittta ett bra syfte för XML-strukturen. Vi ville skapa en fil med så att den blev lagom utmanande. 
+
+
+Det är huvudsakligen tre tekniker vi använt i labben:
+Reguljära uttryck - Väldigt användbart för att extrahera data från textfiler, dock svårt ibland att skriva korrekt och kan vara svårt att läsa. Verktyget Rubular hjälpte dock sp det gick bra.
+XML-parsning med REXML (DOM och SAX) - DOM var enkelt att använda när man väl förstod, SAX krävde mer kod för att hantera korrekt data vilket ibland gjorde det svårare. 
+Unit testing -  Hjälpte hitta buggar och var användbart för att säkerställa att det fungerade som vi ville.

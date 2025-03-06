@@ -1,0 +1,32 @@
+Uppgift 1:
+Till en början så tolkade vi uppgiften som så att när man tar bort en nod så skulle de andra noderna endast tas bort ifall de inte fanns två noder med ett värde kvar.
+För finns det två noder med värde så kan man räkna ut den sista nodens värde.
+Problemet vi stötte på var när två noder hade informant adder, vilket betyder att dem är en uträkning av två andra noder.
+Om vi då försökte ta bort en av dessa noder så togs båda bort. Vilket vi trodde var ett fel.
+Efter en förklaring av en labb assistent förstod vi hur detta skulle fungera.
+Om en nod är en uträkning av två andra noder, och en av de andra noderna tas bort så kan den aktuella noden inte vara säker på att den längre är summan av två andra noder.
+Vilket gör att den också måste tas bort.
+
+Celsius till Fahrenheit uträkningen var lite krånglig att lista ut då det inte gick att skicka in float värden (alltså 9/5) till programmet, 
+men med hjälpt av exempelloggen kom vi till slut fram till hur uträkningen kunde se ut. Därefter var det inga större problem med att sätta ihop allt
+med ConstantConnector, Connector, Adder och Multiplier klasserna.
+
+Det var enkelt att skriva tester då det inte var så mycket tillagd kod som behövde testas.
+
+Uppgift 2:
+Det var en svår uppgift eftersom det var mycket kod att läsa igenom och förstå hur allt hänger ihop.
+
+Vi började med att lägga in print-utskrifter i varje funktion för att följa vad som händer när ett uttryck skickas in.
+
+Vårt första mål var att undvika felmeddelanden. Det första vi gjorde var att lägga till get_connector-funktionen, som enbart returnerar out-värdet av en operation.
+Därefter insåg vi att vi behövde justera atom-matchningen. Vi ändrade den så att vi fick ut out-värdet från uttrycket. Detta gav oss rätt resultat för addition, men subtraktionen fungerade fortfarande inte korrekt.
+Vi förstod då att vi egentligen inte ville ha out-värdet utan b-värdet. För att lösa detta lade vi till en bool variabel som blir true om vi har gjort en subtraktion.
+Med hjälp av denna variabel kunde vi avgöra vilket värde vi skulle plocka ut.
+
+Vi tolkade det som att parsern skulle kunna hantera alla möjliga uttryck och därmed ändrade vi så att lhs i match för "=" också var :expr istället för :term.
+Dock så gav vi upp lite halvvägs då det var mycket som hade behövts förändras för att detta skulle fungera helt, 
+så nu kan parserna hantera några fler uträkningar men ändå inte alla som vi initialt tolkade.
+
+Det var svårt att skriva tester som täcker alla typer av uträkningar för det var inte tydligt 
+hur mycket i det givna programmet man skulle ändra samt vad parsern faktiskt ska kunna hantera.
+(Ska den endast kunna hantera uträkningar med liknande format som den i uppgiften? t.ex. går det inte att skriva c=f nu).

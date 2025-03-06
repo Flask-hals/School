@@ -1,0 +1,45 @@
+Uppgift 1:
+
+När vi påbörjade uppgiften var det väldigt oklart hur mycket man faktiskt fick ändra i filen.
+Vi frågade en labbassistent och på hens svar så lät det först som att man inte fick ändra något.
+Sedan förklarade hen att man fick ha prefix och byta ut/lägga till punkter o.s.v. Tanken var bara att man inte fick göra det för likt kod,
+vilket gjorde uppgiften betydligt enklare.
+
+Vi hade lite problem i början med hur vi skulle definiera syntaxen för DSL:en, speciellt för
+postnummer, ålder och körkort antal år då dessa betraktas som integers istället för funktionsanrop 
+som ex. "BMW" eller "Female". Till slut löste vi detta med att sätta en text innan dessa så att det efter kan tas in som
+argument, samt att skriva om åldersspannen som Range klassen i ruby (1-5 blev 1..5).
+
+Vi funderade även på att sätta en text innan varje bilmärke och kön, t.ex. "car" och "gender" så att strukturen skulle bli mer konsekvent men
+detta skippade vi det kändes lite onödigt och bara hade gjort lösningen mer komplicerad för just dessa.
+Sist bestämde vi oss för att allt som inte kan tolkas enligt tabellerna på uppgiftsbeskrivning skulle ge 0 poäng till det totala värdet.
+
+I början var vi ganska inställda på att när vi läste in policy filen så skulle vi spara allt i en hash.
+Vi jobbade ganska länge med att få detta att fungera.
+Sedan kom vi på att vi inte ens behöver spara värdena utan bara jämföra medans vi läser in.
+Så om något matchar med de lokala variablerna så adderar vi till total direkt.
+Detta var mycket smidigare och sparades oss mycket kod och tid.
+
+För att komma igång med uppgiften så utgick vi mycket från föreläsningen.
+När vi väl var igång så har vi egentligen inte behövt hämta särskilt mycket ny information, förutom för att se vilka inbyggda funktioner ruby har via rubydoc.
+
+Det gick snabbt att komma på tester som inkluderar alla möjliga fall och uträkningar som programmet ska kunna göra.
+
+Uppgift 2:
+
+Det var svårt att förstå vad man faktiskt skulle göra i denna uppgift. Men eftersom det stod att man kunde utgå från DiceRoller så gick vi på det.
+När vi väl var igång blev det lite klarare och vi stötte inte på särskilt mycket problem.
+
+Vi började med att få allt förutom 'set' att fungera. Vi valde att ta 'set' sist för att det kändes som det som kunde strula.
+Vilket det gjorde, 'set' var det som var mest utmanande.
+Vi ville att set skulle fungera så att man kunde sätta flera olika variabler, använda variabler med varandra och samtidigt ändra värdet på redan satta variabler.
+Vi löste detta genom att lägga variablerna i en hash som keys, och value som det värdet dem är satta till.
+När vi kom på att vi kunde lägga dem i en hash stötte vi på problemet att hämta värdet utan att ändra det, vilket vi löste med en bool i blocket som sätter 'set' till en token.
+Med denna bool blev det även möjligt att ändra variabler som redan har ett värde.
+
+För att skriva testerna så skrev vi om calc funktionen till att kunna ta in en bool ifall programmet ska köras i test samt en sträng med inmatade värdet.
+Med default värden på argumenten så kan man köra programmet utan in-argument till calc precis som innan.
+Testerna testar flera olika logiska uttryck, nästlade uttryck, variabel sättning, felhantering av variabel namnen "true" och "false".
+
+Sist bestämde vi för att göra så att man inte kan ha variabel namnen 'true' och 'false' 
+då det hade ställt till det samt att det inte är möjligt i andra programmeringsspråk.

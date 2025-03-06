@@ -1,0 +1,66 @@
+Reflektioner kring hur det är att lära sig ett nytt språk (Ruby):
+Hur har ni gått tillväga för att lära er Ruby?
+Uppgift 1:
+    Vi har använt rubular för att testa regex-uttryck. Till kodningen så har vi använt kunskap från tidigare kurser.
+Uppgift2 & 3:
+    Ruby-doc för att kolla på stream-parser.
+    För att hantera xhtml och xml har vi kikat på föreläsningarna.
+
+
+Vilka fel och misstag har ni gjort under tiden?
+Uppgift 2:
+    Vi använde oss av SAX-parser tillsammans med bools för att hålla koll på när vi skulle läsa in data, när vi mötte en div-tagg med attributet "vevent" satte vi boolen till true.
+    I tag-end kollade vi ifall name==div och boolen==true, isåfall lade vi till objektet i listan samt satte boolen till false.
+    Ett problem som uppstod var när vi stötte på en inre div-tagg, då uppfylldes kraven i tag-end och boolen blev false för tidigt, vilket gjorde att vi missade text.
+    För att lösa detta lade vi till variabeln steps, som håller koll på om vi går in i en inre div-tagg. Med hjälp av steps så kunde vi sätta boolen till false endast när vi var i den yttre div-taggen.
+
+Reflektioner kring de olika tekniker som ni stöter på:
+Hur användbart verkar detta vara?
+    SAX-parser och DOM-parser: Bra för att läsa igenom och hantera strukturerade filer.
+    DOM-parser känns mer användbart då den är lättare att jobba med.
+    Den enda fördelen med SAX-parser vi kan tänka är att den är bra om filen man läser in är väldigt stor, utöver detta är den bara jobbig.
+    
+Hur lätt/svårt är det att sätta sig in i?
+    Det var svårt att sätta sig in i hur en SAX-parser fungerar. Vi försökte först lista ut om det gick att kalla på text() i start_tag()
+    men vi lyckades inte och istället bestämde vi oss för att använda bool variabler för att bestämma när text och taggar ska parsas.
+    Detta var komplicerat då vi behövde ha koll på vad dessa variabler var vid varje tillfälle så att rätt saker läses in.
+
+Dokumentation av hur ni har tänkt när ni arbetat fram era lösningar:
+Vad arbetade ni med (i grova drag) vid varje labbpass?
+Uppgift1:
+    Skapat ett fungerande regex-uttryck för båda delarna. Gjort klart uppgift1 samt skrivit tester.
+Uppgift2:
+    Det tog ganska lång tid innan vi kom igång, vi hade ingen tydlig bild av hur SAX-parser fungerade och la därför tid på att googla och diskutera.
+    När vi väl fick in första texten så var det ganska repetitivt, all text togs in på samma sätt.
+    Bytte en if-sats mot case events i text(), för mer läsbar kod.
+    Lade till steps variabeln för att hålla koll på inre div-taggar.
+    Lade till searchDesc för att hålla koll på description som ligger nästlad.
+Uppgift 3:
+    Vi tog inspo från föreläsnings exemplet samt använde detta exempel för att testa vårt problem.
+    Sedan skrev vi en XML-fil ganska snabbt.
+    
+Hur har ni tolkat uppgiften?
+Uppgift 1:
+    Vi har tolkat som att strukturen på filerna är bestämda (liknande kolumn och rad-struktur),
+    och har därför byggt våra regex-uttryck efter just denna struktur.
+    
+    Koden från första uppgiften (football.txt) gick att använda till stor del i andra uppgiften. 
+    Det som skiljde sig var regexp samt hur vi sätter in värden i hashmappen där man i första uppgiften behöver köra split och abs
+    för att få de två talen samt undvika negativa tal vid uträkningen.
+Uppgift 2: 
+    Vi tolkade uppgiften som att strukturen på xhtml-filer vårt program ska kunna parsea måste vara i samma format som den givna xhtml-filen.
+    Vi försökte göra en sån generell lösning som möjligt för att kunna parsea igenom andra xhtml-filer men det visade sig vara väldigt svårt med en SAX-parser.
+    Vi ville inte heller använda en stack för att ha koll på alla start och slut taggar då vi kände att det kanske är lite för overkill.
+    Istället löste vi det med att ha en variabel steps som håller koll på djupet vilket är viktigt
+    i de fall då det finns divs i venvent diven.
+Uppgift 3:
+    Det var svårt att konstruera en knepig uppgift kring DOM-parser, och vi kände att det kanske hade varit bättre om vi gjorde tvärtom med val av parser.
+    Det vi kom fram till var att det hade blivit mer krångligt om vi nästlade det som skulle hittas samt om det var flera attributes som behövdes jämföras.
+
+
+Vad var svårt eller lätt med uppgiften?
+Uppgift1:
+    I princip bara att få fram ett fungerande regex-uttryck.
+Uppgift2:
+    Vi kände att det enklaste hade varit att göra uppgiften med en DOM-parser, men eftersom vi ville träna på SAX-parser så gjorde vi det. 
+    Det svåra med SAX-parser var att komma på hur vi skulle börja, hur vi ska hålla koll på när vi vill ta in text o.sv.
