@@ -1,14 +1,10 @@
 #!/usr/bin/env ruby
 
 require_relative './rdparse.rb'
-require_relative './nodes.rb'
+Dir[File.join(__dir__ , "nodes", "*.rb")].each {|file| require file}
 
 class Ctml
-
-  
   @@globalScope = {"parent" => nil, "stmts" => [], "vars" => {}, "userClasses" => {}}
-
-  #@@globalScope = {"parent" => nil, "stmts" => [], "vars" => {}, "userClasses" => {}, "datatypes => IntNode,  }
 
   def self.globalScope
     @@globalScope
@@ -20,30 +16,24 @@ class Ctml
       token(/\d+\.\d*/) {|m| m.to_f } # ex 1.
       token(/\d*\.\d+/) {|m| m.to_f } # ex .1
       token(/\d+/) {|m| m.to_i }
-      token(/print/) {:print}
-      token(/arg/) {:arg}
-      token(/true/) {:true}
-      token(/false/) {:false}
-      token(/float /) {:float}
-      token(/int /) {:int}
-      token(/bool /) {:bool}
-      token(/<while /) {:while}
-      token(/<\/while>/) {:endwhile}
-      token(/<if /) {:if}
-      token(/<\/if>/) {:endif}
-      token(/void /) {:void}
-      token(/ret/) {:return}
-      token(/llist /) {:llist}
-      token(/push_front/) {:push_front}
-      token(/pop_front/) {:pop_front}
-      token(/class /) {:class}
-      token(/<private\/>/) {:private}
-      token(/<public\/>/) {:public}
-      token(/<\/private>/) {:endpriv}
-      token(/<\/public>/) {:endpub}
-      token(/virtual/) {:virtual}
-      token(/override/) {:override}
-      token(/_*[a-zA-Z]+\w*/) {|m| m}
+      token(/\bprint\b/) {:print}
+      token(/\barg\b/) {:arg}
+      token(/\btrue\b/) {:true}
+      token(/\bfalse\b/) {:false}
+      token(/\bfloat\b/) {:float}
+      token(/\bint\b/) {:int}
+      token(/\bbool\b/) {:bool}
+      token(/\bwhile\b/) {:while}
+      token(/\bif\b/) {:if}
+      token(/\bvoid\b/) {:void}
+      token(/\bret\b/) {:return}
+      token(/\bllist\b/) {:llist}
+      token(/\bclass\b/) {:class}
+      token(/\bprivate\b/) {:private}
+      token(/\bpublic\b/) {:public}
+      token(/\bvirtual\b/) {:virtual}
+      token(/\boverride\b/) {:override}
+      token(/[a-zA-Z\w]+/) {|m| m}
       token(/(<=|>=|<\/|\/>|<|>|\!=|==|=|\(|\)|\-|\+|\*|\^|\%|\/|\|\||\&\&|,|{|}|\[|\]|.|!)/) {|m| m}
 
       start :start do
@@ -67,28 +57,26 @@ class Ctml
       end
 
       rule :classdec do
-        # match("<", :class, :varname, :heritage, "/>", :classblock, "</", :varname, ">") {|_, _, name, base, _, block, _, endname, _| ClassNode.new(name, base, "", block, endname)}
         match("<", :class, :varname, :heritage, "/>", :priv, :pub, "</", :varname, ">") {|_, _, name, base, _, priv, pub, _, endname, _| ClassNode.new(name, base, priv, pub, endname)}
         match("<", :class, :varname, :heritage, "/>", :pub, :priv, "</", :varname, ">") {|_, _, name, base, _, pub, priv, _, endname, _| ClassNode.new(name, base, priv, pub, endname)}
         match("<", :class, :varname, :heritage, "/>", :pub, "</", :varname, ">") {|_, _, name, base, _, pub, _, endname, _| ClassNode.new(name, base, nil, pub, endname)}
         match("<", :class, :varname, :heritage, "/>", :priv, "</", :varname, ">") {|_, _, name, base,  _, priv, _, endname, _| ClassNode.new(name, base, priv, nil, endname)}
-        #match("<", :class, :varname, ":", :heritage, :varname, "/>", :classblock, "</", :varname, ">") {|_, _, name, _, _, base, _, block, _, endname, _| ClassNode.new(name, base, block, endname)}
         match(:funcdec)
       end
 
       rule :priv do
-        match(:private, :classblock, :endpriv) {|_, block, _| block}
+        match("<", :private, "/>", :classblock, "</", :private, ">") {|_,_,_, block, _, _, _| block}
         match() {""}
       end
 
       rule :pub do
-        match(:public, :classblock, :endpub) {|_, block, _| block}
+        match("<", :public, "/>", :classblock, "</", :public, ">") {|_,_,_, block, _,_,_| block}
         match() {""}
       end
 
       rule :heritage do
-        match(":", "public", :varname) {|_, public, name| [:public, name]}
-        match(":", "private", :varname) {|_, private, name| [:private, name]}
+        match(":", :public, :varname) {|_, public, name| [:public, name]}
+        match(":", :private, :varname) {|_, private, name| [:private, name]}
         match() {""}
       end
 
@@ -131,29 +119,9 @@ class Ctml
 
         match("<", :llist, :varname, "=", "{", :llistTerm, "}", "/>") {|_, _, name, _, _, items, _, _|
           LListNode.new(name, items)}
-
-        #match("<", :varname, :varname, "=", :varname, "/>") {|_, className, objectName, _, typeName, _| ObjectDeclaration.new(className, objectName, typeName)}
-        #match("<", :varname, :varname, "/>") {|_, className, objectName, _| ObjectDeclaration.new(className, objectName)}
       end
 
       rule :polyfuncdec do
-        # match("<", :virtual, :void, :varname, "(", :params, ")", "/>", :block, "</", :varname, ">") {|_, _, type, name, _, params, _, _, block, _, endname, _| 
-        #   VirtualFuncNode.new(type, name, params, block, endname)} #BÖR VARA FUNCDECLARATIONODE MEN ORKADE INTE FIXA DE NU NÄR JAG TESTAR, för alla dessa
-
-        # match("<", :virtual, :void, :varname, "(", ")", "/>", :block, "</", :varname, ">") {|_, _, type, name, _, _, _, block, _, endname, _| 
-        #   VirtualFuncNode.new(type, name, nil, block, endname)}
-
-        # match("<", :virtual, :type, :varname, "(", :params,        match()ndname)}
-
-        # match("<", :void, :varname, "(", ")", :override, "/>", :block, "</", :varname, ">") {|_, type, name, _, _, _, _, block, _, endname, _| 
-        #   OverrideFuncNode.new(type, name, nil, block, endname)}
-
-        # match("<", :type, :varname, "(", :params, ")", :override, "/>", :block, "</", :varname, ">") {|_, type, name, _, params, _, _, _, block, _, endname, _| 
-        #   OverrideFuncNode.new(type, name, params, block, endname)}
-
-        # match("<", :type, :varname, "(", ")", :override, "/>", :block, "</", :varname, ">") {|_, type, name, _, _, _, _, block, _, endname, _| 
-        #   OverrideFuncNode.new(type, name, nil, block, endname)}
-
         match("<", :virtual, "/>", :classfuncdec) {|_, _, _, func| func.virtual = true; func}
         match("<", :override, "/>", :classfuncdec) {|_, _, _, func| func.override = true; func}
         
@@ -168,30 +136,30 @@ class Ctml
 
       rule :sections do
         match(:printer)
-        match(:while, :boolexpr, "/>", :block, :endwhile) {|_, expr, _, block, _| WhileNode.new(expr, block)}
-        match(:if, :boolexpr, "/>", :block, :endif) {|_, expr, _, block, _| IfNode.new(expr, block)}
-        #match("<", :llist, "<", :llistType, ">", :varname, "=", "{", :llistTerm, "}", "/>") {|_, _, _, type, _, name, _, _, items, _, _|
-        #  LListNode.new(type, name, items)}
+        match("<", :while, :boolexpr, "/>", :block, "</", :while, ">") {|_,_, expr, _, block, _, _, _| WhileNode.new(expr, block)}
+        match("<", :if, :boolexpr, "/>", :block, "</", :if, ">") {|_,_, expr, _, block, _,_,_| IfNode.new(expr, block)}
         match("<", :llist, :varname, "=", "{", :llistTerm, "}", "/>") {|_, _, name, _, _, items, _, _|
           LListNode.new(name, items)}
-        #match("<", :return, :boolexpr, "/>") {|_, _, value, _| ReturnNode.new(value)}
         match("<", :return, :boolexpr, "/>") {|_, _, value, _| ReturnNode.new(value)}
         match("<", :return, "/>") {|_, _, _| ReturnNode.new(IntNode.new(0))}
         
-        # från Assign bara för att testa !!!!!!!!!!!!
         match("<", :type, :varname, "=", :boolexpr, "/>") {|_, type, name, _, val, _| AssignNode.new(val, name, type)}
+        match("<", :type, :varname, "/>") {|_, type, name, _|
+              if type == :int || type == :float || type == :bool
+                AssignNode.new(IntNode.new(0), name, type)
+              elsif type == :llist
+                AssignNode.new(LListNode.new(name, nil), name, type)
+              end}
+
         match("<", :vars, "=", :boolexpr, "/>") {|_, var, _, val, _| VarChangeNode.new(var, val)}
         match("<", :listAccess, "=", :boolexpr, "/>") {|_, node, _, val, _| 
           LListChangeNode.new(node, val)}
-        match("<", :varname, ".", :push_front, "(", :boolexpr, ")", "/>") {|_,name, _, _, _, val, _, _| LListPushFront.new(name, val)}
-        # match("<", :varname, ".", :push_back, "(", :boolexpr, ")", "/>") {|_,name, _, _, _, val, _, _| LListPushBack.new(name, val)}
-        # match("<", :varname, ".", :pop_back, "(", :boolexpr, ")", "/>") {|_,name, _, _, _, val, _, _| LListPushBack.new(name, val)}
-        match("<", :varname, ".", :pop_front, "(", ")", "/>") {|_,name, _, _, _, _, _| LListPopFront.new(name)}
+        match("<", :varname, ".", "push_front", "(", :boolexpr, ")", "/>") {|_,name, _, _, _, val, _, _| LListPushFront.new(name, val)}
+        match("<", :varname, ".", "pop_front", "(", :boolexpr, ")", "/>") {|_,name, _, _, _, _, _, _| raise }
+        match("<", :varname, ".", "pop_front", "(", ")", "/>") {|_,name, _, _, _, _, _| LListPopFront.new(name)}
         match("<", :boolexpr, "/>") {|_,a,_| a}
         match("<", :varname, :varname, "=", :varname, "/>") {|_, className, objectName, _, typeName, _| ObjectDeclaration.new(className, objectName, typeName)}
         match("<", :varname, :varname, "/>") {|_, className, objectName, _| ObjectDeclaration.new(className, objectName)}
-
-        # match(:assign)
       end
 
       rule :llistTerm do
@@ -210,7 +178,7 @@ class Ctml
       end
 
       rule :params do
-        match(:params, ",", :type, :varname) {|a, _, type, name| a << AssignNode.new(nil, name, type)} # skapa AssignNodes utan värde (lägg till värde med addVal sen)
+        match(:params, ",", :type, :varname) {|a, _, type, name| a << AssignNode.new(nil, name, type)}
         match(:type, :varname) {|type, name| [AssignNode.new(nil, name, type)]}
       end
 
@@ -239,29 +207,15 @@ class Ctml
         match("<=")
       end
 
-      # rule :assign do
-      #   match("<", :type, :varname, "=", :boolexpr, "/>") {|_, type, name, _, val, _| AssignNode.new(val, name, type)}
-      #   match("<", :vars, "=", :boolexpr, "/>") {|_, var, _, val, _| VarChangeNode.new(var, val)}
-      #   match("<", :listAccess, "=", :boolexpr, "/>") {|_, node, _, val, _| 
-      #     LListChangeNode.new(node, val)}
-      #   match("<", :varname, ".", :push_front, "(", :boolexpr, ")", "/>") {|_,name, _, _, _, val, _, _| LListPushFront.new(name, val)}
-      #   # match("<", :varname, ".", :push_back, "(", :boolexpr, ")", "/>") {|_,name, _, _, _, val, _, _| LListPushBack.new(name, val)}
-      #   # match("<", :varname, ".", :pop_back, "(", :boolexpr, ")", "/>") {|_,name, _, _, _, val, _, _| LListPushBack.new(name, val)}
-      #   match("<", :varname, ".", :pop_front, "(", ")", "/>") {|_,name, _, _, _, _, _| LListPopFront.new(name)}
-      #   match("<", :varname, :varname, "/>") {|_, className, objectName, _| ObjectDeclaration.new(className, objectName)}
-
-      # end
-
       rule :type do
         match(:int)
         match(:float)
         match(:bool)
         match(:llist)
-        #match(:varname)
       end
 
       rule :varname do
-        match(/_*[a-zA-Z]+\w*/)
+        match(/[a-zA-Z\w]+/)
       end
 
       rule :printer do
@@ -297,21 +251,11 @@ class Ctml
         match(:false) {IntNode.new(0)}
         match(Integer) {|i| IntNode.new(i)}
         match(Float) {|f| FloatNode.new(f)}
-        
-        match(:this, ".", :varname, "(", :funcCallArgs, ")") {|_, _, name, _, args, _| FuncCall.new(name, args, true)}
-        match(:this, ".", :varname, "(", ")") {|_, _, name, _, _| FuncCall.new(name, nil, true)}
-
         match(:varname, "(", :funcCallArgs, ")") {|name, _, args, _| FuncCall.new(name, args)}
-        match(:varname, "(", ")") {|name, _, _| FuncCall.new(name, nil)}
-        
-        
-        # match(:vars, :varname) {|className, objectName| ObjectDeclaration.new(className, objectName)}
+        match(:varname, "(", ")") {|name, _, _| FuncCall.new(name, nil)} 
         match(:vars, ".", :varname, "(", :funcCallArgs, ")") {|objectVar, _, funcName, _, args, _| ClassFuncCall.new(objectVar, funcName, args)}
         match(:vars, ".", :varname, "(", ")") {|objectVar, _, funcName, _, _| ClassFuncCall.new(objectVar, funcName)}
         match(:listAccess)
-        # match(:return, :boolexpr) {|_, value| ReturnNode.new(value)}
-        # match(:return) {|_| ReturnNode.new(IntNode.new(0))}
-        
         match('(', :boolexpr, ')') {|_, a, _| a}
         match(:vars)
         match()
@@ -327,7 +271,7 @@ class Ctml
       end
 
       rule :vars do
-        match(/_*[a-zA-Z]+\w*/) {|a| VarNode.new(a)}
+        match(/[a-zA-Z\w]+/) {|a| VarNode.new(a)}
       end
     end
   end
@@ -354,7 +298,7 @@ class Ctml
             return
           else
             @treeNode = @ctmlParser.parse file
-            for items in @treeNode["stmts"] # uncomment if running file directly outside tests
+            for items in @treeNode["stmts"]
               items.eval(@@globalScope)
             end
             return @treeNode
@@ -362,9 +306,8 @@ class Ctml
         else
           puts "Test: No path"
           @treeNode = @ctmlParser.parse str
-          #tmpReturn = @treeNode["stmts"][0].eval(@@globalScope).val
           @@globalScope = {"stmts" => [], "vars" => {}}
-          return @treeNode["stmts"][0].eval(@@globalScope).val # Uncomment .val if problem
+          return @treeNode["stmts"][0].eval(@@globalScope).val
         end
       else
         # log(false)
@@ -376,13 +319,12 @@ class Ctml
             return
           else
             @treeNode = @ctmlParser.parse file
-            for items in @treeNode["stmts"] # uncomment if running file directly outside tests
+            for items in @treeNode["stmts"]
               items.eval(@@globalScope)
             end
             return @treeNode
           end
         else
-          puts "Interactive"
           print "[ctml++] "
           str = gets
           if done(str) then
@@ -390,14 +332,10 @@ class Ctml
           else
             begin
               @treeNode = @ctmlParser.parse str
-              # for items in @treeNode["stmts"]
-              #   items.eval(@@globalScope)
-              # end
               @treeNode["stmts"][-1].eval(@@globalScope)
             rescue Parser::ParseError => e
               puts "Error: #{e.message}"
             end
-            #@@globalScope = {"stmts" => [], "vars" => {}}
             parser
           end
         end
@@ -439,8 +377,5 @@ if ARGV.length() > 0
   end
 
 elsif __FILE__ == "parser.rb"
-  #Ctml.new.parser() #Interaktivt
-  #Ctml.new.parser(true, nil, "./tests/testFiles/classTest.ctml") #För testning
-  Ctml.new.parser(true, nil, "./tests/testFiles/fileTest.ctml")
-  #Ctml.new.parser(true, nil, "./tests/testFiles/overrideTest.ctml")
+  Ctml.new.parser() #Interactive
 end

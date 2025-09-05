@@ -1,0 +1,36 @@
+<class Animal/>
+    <public/>
+    <virtual/> <int makeSound()/> <ret sound() + 1/> </makeSound>
+    <virtual/> <int sound()/> <ret 100/> </sound>
+    <int type()/> <ret 1/> </type>
+    </public>
+</Animal>
+
+<class Dog : public Animal/>
+    <public/>
+    <override/> <int sound()/> <ret 200/> </sound>
+    </public>
+</Dog>
+
+<class GuardDog : public Dog/>
+    <public/>
+    <override/> <int makeSound()/> <ret sound() + 10/> </makeSound>
+    <override/> <int sound()/> <ret 400/> </sound>
+    </public>
+</GuardDog>
+
+<class Cat : public Animal/>
+    <public/>
+    <override/> <int sound()/> <ret 150/> </sound>
+    </public>
+</Cat>
+
+<Animal a1 = Animal/>
+<Animal a2 = Dog/>
+<Animal a3 = GuardDog/>
+<Animal a4 = Cat/>
+
+<print(a1.makeSound())/>
+<print(a2.makeSound())/>
+<print(a3.makeSound())/>
+<print(a4.makeSound())/>

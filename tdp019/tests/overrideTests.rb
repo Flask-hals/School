@@ -4,7 +4,7 @@ require 'test/unit'
 require_relative '../parser.rb'
 
 class TestFirst < Test::Unit::TestCase
-    def test_if
+    def test_override
         baseBath = File.dirname(__FILE__)
         filePath = File.join(baseBath, "testFiles", "overrideTest.ctml")
         ctml = Ctml.new.parser(true, nil, filePath)

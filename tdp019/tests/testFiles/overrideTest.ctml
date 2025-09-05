@@ -9,21 +9,18 @@
 <class Dog : public Animal/>
     <public/>
     <override/> <int sound()/><ret 222/></sound>
-    <int bark()/><ret 555/></bark>
     </public>
 </Dog>
 
 <class GuardDog : public Dog/>
     <public/>
     <override/> <int sound()/><ret 333/></sound>
-    <int guardMode()/><ret 1/></guardMode>
     </public>
 </GuardDog>
 
 <class Cat : public Animal/>
     <public/>
     <override/> <int sound()/><ret 444/></sound>
-    <int meow()/><ret 777/></meow>
     </public>
 </Cat>
 

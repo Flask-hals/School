@@ -1,7 +1,7 @@
 def reservedNames(name)
-    reserved = [:if, :true, :false, :print, :arg, :float, :int, :not, :bool, :endif, :while, :endwhile, :void, :return, :list, :push_front, :pop_front]
+    reserved = [:if, :true, :false, :print, :arg, :float, :int, :not, :bool, :endif, :while, :endwhile, :void, :return, :list, :push_front, :pop_front, :class]
     if reserved.include?(name)
-        raise Error::NameError, "#{name} is a reserved name and can't be used as a varname"
+        raise Error::NameError, "#{name} is a reserved name and can't be used as a variable name or function name."
     else
         return true
     end
@@ -10,6 +10,11 @@ end
 def findScope(scope, name)
     currentScope = scope
     while currentScope["parent"] != nil
+        if currentScope.has_key?("vtable")
+            if currentScope["vtable"].has_key?(name)
+                return currentScope
+            end
+        end
         if currentScope["vars"][name]
             return currentScope
         else
@@ -87,6 +92,33 @@ def printLList(node, scope)
     str = str.delete_suffix(", ")
     puts str += "}"
 end
+
+
+def privateConst(newScope, scope, node)
+    if newScope.has_key?("name")
+        while !scope["name"]
+          scope = scope["parent"]
+        end
+            
+        if node.is_a?(VarNode)
+            exists = false
+            newScope["stmts"].each do |items|
+                if items.class == AssignNode
+                    if items.name == node.name
+                        exists = true
+                        break
+                    end
+                end
+            end
+            if !(exists || newScope["name"] == scope["name"])
+                raise Error::TypeError, "Construction #{node.name} is private."
+            end
+        elsif !(newScope["stmts"].include?(node) || newScope["name"] == scope["name"])
+          raise Error::TypeError, "Construction #{node.name} is private."
+        end
+    end
+end
+
 
 class Error
     class ValueError < RuntimeError
