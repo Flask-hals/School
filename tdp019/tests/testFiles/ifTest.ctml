@@ -1,0 +1,21 @@
+<int a = 10/>
+<int b = 5/>
+<if true/>
+    <if a < 11/>
+        <a = 20/>
+    </if>
+</if>
+<if false/>
+    <a = a - 5/>
+    <1+2/>
+</if>
+<if a == 20/>
+    <a=2/>
+</if>
+<print(a)/>
+<if true/>
+    <b = b + 5/>
+    <ret/>
+    <b = 200/>
+</if>
+<print(b)/>

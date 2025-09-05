@@ -1,0 +1,22 @@
+<class Base/>
+    <public/>
+    <virtual/> <int speak()/>
+        <ret 1/>
+    </speak>
+    <int speak2()/>
+      <ret 3/>
+    </speak2>
+    </public>
+</Base>
+
+<class Second : public Base/>
+    <public/>
+    <override/> <int speak()/>
+        <ret 2/>
+    </speak>
+    </public>
+</Second>
+
+<Base obj = Second/>
+<print(obj.speak())/>
+<print(obj.speak2())/>

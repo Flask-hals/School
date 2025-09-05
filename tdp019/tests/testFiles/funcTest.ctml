@@ -1,0 +1,34 @@
+<int a = 0/>
+<void func(int x, int y)/>
+    <a = a + 1/>
+    <ret/>
+    <a = a + 1/>
+</func>
+
+<func(5, 5)/>
+<print(a)/>
+
+<void func2()/>
+    <a = a + 1/>
+</func2>
+
+<func2()/>
+<print(a)/>
+
+<int func3(int x, int y)/>
+    <a = a + 1/>
+    <ret a/>
+    <a = a + 1/>
+</func3>
+
+<func3(5.0, 5.0)/>
+<print(a)/>
+
+<float func4()/>
+    <a = a + 1/>
+    <ret a/>
+    <a = a + 1/>
+</func4>
+
+<func4()/>
+<print(a)/>

@@ -1,0 +1,47 @@
+<class A/>
+    <private/>
+    <int secretA()/>
+        <ret 111/>
+    </secretA>
+    </private>
+
+    <public/>
+    <int publicA()/>
+        <ret 10/>
+    </publicA>
+    </public>
+</A>
+
+<class B : public A/>
+    <private/>
+    <int secretB()/>
+        <ret secretA() + 1/> 
+    </secretB>
+    </private>
+
+    <public/>
+    <int publicB()/>
+        <int val = publicA()/>
+        <ret val + 20/>
+    </publicB>
+    </public>
+</B>
+
+<class C : public B/>
+    <public/>
+    <int publicA()/>
+        <ret 100/>
+    </publicA>
+
+    <int useAll()/>
+        <int a = publicA()/>
+        <int b = publicB()/>
+        <ret a + b/>
+    </useAll>
+    </public>
+</C>
+
+<C obj/>
+<print(obj.publicA())/>
+<print(obj.publicB())/>
+<print(obj.useAll())/>

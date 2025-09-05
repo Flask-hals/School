@@ -1,0 +1,18 @@
+<int a = 0/>
+<int b = 0/>
+<while a <= 10/>
+    <a = a+1/>
+    <bool tmp = true/>
+    <while tmp/>
+        <b = 999/>
+        <tmp = false/>
+    </while>
+</while>
+<print(a)/>
+<print(b)/>
+<int c = 0/>
+<while c <= 3/>
+    <c = c + 1/>
+    <ret c/>
+</while>
+<print(c)/>

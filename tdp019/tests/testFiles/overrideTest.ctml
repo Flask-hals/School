@@ -1,0 +1,42 @@
+<class Animal/>
+    <public/>
+    <virtual/> <int makeSound()/><ret sound()/></makeSound>
+    <virtual/> <int sound()/><ret 111/></sound>
+    <int baseOnly()/><ret 999/></baseOnly>
+    </public>
+</Animal>
+
+<class Dog : public Animal/>
+    <public/>
+    <override/> <int sound()/><ret 222/></sound>
+    <int bark()/><ret 555/></bark>
+    </public>
+</Dog>
+
+<class GuardDog : public Dog/>
+    <public/>
+    <override/> <int sound()/><ret 333/></sound>
+    <int guardMode()/><ret 1/></guardMode>
+    </public>
+</GuardDog>
+
+<class Cat : public Animal/>
+    <public/>
+    <override/> <int sound()/><ret 444/></sound>
+    <int meow()/><ret 777/></meow>
+    </public>
+</Cat>
+
+<Animal a1 = Animal/>
+<Animal a2 = Dog/>
+<Animal a3 = GuardDog/>
+<Animal a4 = Cat/>
+
+<print(a1.makeSound())/>
+<print(a2.makeSound())/>
+<print(a3.makeSound())/>
+<print(a4.makeSound())/>
+<print(a1.baseOnly())/>
+<print(a2.baseOnly())/>
+<print(a3.baseOnly())/>
+<print(a4.baseOnly())/>

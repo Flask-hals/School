@@ -1,0 +1,14 @@
+<llist a = {1, 2, 3}/>
+
+<print(a[0])/>
+
+<a.push_front(5)/>
+<print(a[0])/>
+
+<a.pop_front()/>
+<print(a[0])/>
+
+<llist b = {{1, 2}, 3, 4}/>
+
+<print(b[0][1])/>
+<print(b[0][0])/>

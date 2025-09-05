@@ -1,0 +1,10 @@
+<int factorial(int a)/>
+    <if a == 0 || a == 1/>
+        <ret 1/>
+    </if>
+    <ret a * factorial(a-1)/>
+</factorial>
+
+
+<int a = factorial(5)/>
+<print(a)/>

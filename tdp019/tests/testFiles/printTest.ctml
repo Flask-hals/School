@@ -1,0 +1,9 @@
+<float a = 50/>
+<print(a)/>
+<print(50+a)/>
+<int b = a + 2/>
+<print(b)/>
+<print((2 ^ 2) ^ 2 ^ 2 % 1 * 2 / 4 + 2 - 2)/>
+<print(true && (! false))/>
+< a = 20/>
+<print(a)/>

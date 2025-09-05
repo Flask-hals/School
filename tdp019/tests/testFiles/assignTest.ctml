@@ -1,0 +1,13 @@
+<float a = 2/>
+<float b = (2 ^ 2) ^ 2 ^ 2 % 1 * 2 / 4 + 2 - a/>
+<int c = 5/>
+<float d = a + 5/>
+<int a = 8/>
+<int a2 = 1/>
+<a2 = ---1/>
+<bool t = true/>
+<bool f = t/>
+<bool x = 1/>
+<bool y = 0/>
+<int x = a/>
+<float x = true/>
