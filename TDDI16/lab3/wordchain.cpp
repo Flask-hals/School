@@ -1,0 +1,233 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <unordered_map>
+#include <algorithm>
+#include <queue>
+
+using std::unordered_map;
+using std::vector;
+using std::string;
+using std::cout;
+using std::endl;
+using std::queue;
+
+// Typ som används för ordlistan. Den definieras med en typedef här så att du enkelt kan ändra
+// representationen av en ordlista utefter vad din implementation behöver. Funktionen
+// "read_questions" skickar ordlistan till "find_shortest" och "find_longest" med hjälp av denna
+// typen.
+typedef vector<string> Dictionary;
+
+/**
+ * Hitta den kortaste ordkedjan från 'first' till 'second' givet de ord som finns i
+ * 'dict'. Returvärdet är den ordkedja som hittats, första elementet ska vara 'from' och sista
+ * 'to'. Om ingen ordkedja hittas kan en tom vector returneras.
+ */
+
+struct Node{
+    bool visited;
+    string past;
+    int distance;
+};
+
+void findNeighbors(unordered_map<string, Node>& nodes, vector<string>& neighbors, const string& word)
+{
+    string tmp;
+    for (int i = 0; i < word.size(); i++){
+        tmp = word;
+        for (char c = 'a'; c <= 'z'; c++){
+            if (c == word[i])
+                continue;
+            tmp[i] = c;
+            if (nodes.find(tmp) != nodes.end()) {
+                neighbors.push_back(tmp);
+            }
+        }
+    }
+}
+
+//Återställer visited, past och distance efter varje sökning. Behåller neighbors för 
+//ultimat prestanda.
+void resetNodes(unordered_map<string, Node>&  nodes)
+{
+    for (auto& i : nodes)
+    {
+        i.second.visited = false;
+        i.second.past = "";
+        i.second.distance = 0;
+    }
+}
+
+vector<string> find_shortest(unordered_map<string, Node>& nodes, const string &from, const string &to) {
+    vector<string> result = {};
+    vector<string> neighbors;
+    if (nodes.find(from) != nodes.end() && nodes.find(to) != nodes.end())
+    {
+        queue<string> q;
+        q.push(from);
+        nodes[from].visited = true;
+        nodes[from].past = "";
+
+        while (!q.empty())
+        {
+            string word = q.front(); q.pop();
+            neighbors.clear();
+            findNeighbors(nodes, neighbors, word);
+            for (const string& neighbor : neighbors){
+                if (word == to)
+                {
+                    string parent {word};
+                    while (nodes[parent].past != "")
+                    {
+                        result.push_back(parent);
+                        parent = nodes[parent].past;
+                    }
+                    result.push_back(parent);
+                    reverse(result.begin(), result.end());
+                    resetNodes(nodes);
+                    return result;
+                }
+                if (!nodes[neighbor].visited)
+                {
+                    nodes[neighbor].visited = true;
+                    nodes[neighbor].past = word;
+                    q.push(neighbor);
+                }
+            }
+        }
+        resetNodes(nodes);
+    }
+    return result;
+}
+
+/**
+ * Hitta den längsta kortaste ordkedjan som slutar i 'word' i ordlistan 'dict'. Returvärdet är den
+ * ordkedja som hittats. Det sista elementet ska vara 'word'.
+ */
+vector<string> find_longest(unordered_map<string, Node>& nodes, const string &word) {
+    vector<string> result = {};
+    vector<string> neighbors;
+    if (nodes.find(word) != nodes.end())
+    {
+        queue<string> q;
+        q.push(word);
+        nodes[word].visited = true;
+        nodes[word].past = "";
+
+        while (!q.empty())
+        {
+            string word = q.front(); q.pop();
+            neighbors.clear();
+            findNeighbors(nodes, neighbors, word);
+            for (const string& neighbor : neighbors){
+                if (!nodes[neighbor].visited)
+                {
+                    nodes[neighbor].distance = nodes[word].distance + 1;
+                    nodes[neighbor].past = word;
+                    q.push(neighbor);
+                    nodes[neighbor].visited = true;
+                }
+            }
+        }
+
+        int highest {0};
+        string highestWord;
+        for (const auto& i : nodes)
+        {
+            if (i.second.distance > highest)
+            {
+                highest = i.second.distance;
+                highestWord = i.first;
+            }
+        }
+        string parent {highestWord};
+        while (nodes[parent].past != "")
+        {
+            result.push_back(parent);
+            parent = nodes[parent].past;
+        }
+        if (!result.empty())
+            result.push_back(parent);
+        else
+            result.push_back(word);
+        resetNodes(nodes);
+    }
+    return result;
+}
+
+/**
+ * Läs in ordlistan och returnera den som en vector av orden. Funktionen läser även bort raden med
+ * #-tecknet så att resterande kod inte behöver hantera det.
+ */
+unordered_map<string, Node> read_dictionary() {
+    string line;
+    //vector<string> result;
+    unordered_map<string, Node> nodes;  
+    while (std::getline(std::cin, line)) {
+        if (line == "#")
+            break;
+
+        nodes[line] = {};
+    }
+
+    return nodes;
+}
+
+/**
+ * Skriv ut en ordkedja på en rad.
+ */
+void print_chain(const vector<string> &chain) {
+    if (chain.empty())
+        return;
+
+    vector<string>::const_iterator i = chain.begin();
+    cout << *i;
+
+    for (++i; i != chain.end(); ++i)
+        cout << " -> " << *i;
+
+    cout << endl;
+}
+
+/**
+ * Skriv ut ": X ord" och sedan en ordkedja om det behövs. Om ordkedjan är tom, skriv "ingen lösning".
+ */
+void print_answer(const vector<string> &chain) {
+    if (chain.empty()) {
+        cout << "ingen lösning" << endl;
+    } else {
+        cout << chain.size() << " ord" << endl;
+        print_chain(chain);
+    }
+}
+
+/**
+ * Läs in alla frågor. Anropar funktionerna "find_shortest" eller "find_longest" ovan när en fråga hittas.
+ */
+void read_questions(unordered_map<string, Node>& nodes) {
+    string line;
+    while (std::getline(std::cin, line)) {
+        size_t space = line.find(' ');
+        if (space != string::npos) {
+            string first = line.substr(0, space);
+            string second = line.substr(space + 1);
+            vector<string> chain = find_shortest(nodes, first, second);
+
+            cout << first << " " << second << ": ";
+            print_answer(chain);
+        } else {
+            vector<string> chain = find_longest(nodes, line);
+
+            cout << line << ": ";
+            print_answer(chain);
+        }
+    }
+}
+
+int main() {
+    unordered_map<string, Node> nodes = read_dictionary();
+
+    read_questions(nodes);
+
+    return 0;
+}

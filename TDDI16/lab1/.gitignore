@@ -1,0 +1,11 @@
+avl_tree-test
+avl_tree-test.o
+build/
+*.exe
+*.o
+*.user
+*.iobj
+*.ipdb
+*.pdb
+.vs/
+.vscode

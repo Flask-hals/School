@@ -1,0 +1,31 @@
+- Vilket av sätten är bäst? Ordlistorna swedish.txt och english.txt har båda ungefär 2500 ord.
+    Hur många ord måste de två alternativen undersöka för den här storleken av ordlista, och vilket
+    alternativ är därför bäst för den här storleken på ordlistor (dvs. relativt stora ordlistor)?
+    
+Jämföra varje ord i listan beror på listans längd så O(n). I detta fall så är listan 2500ord eller 450000ord.
+
+Byta varje bokstav blir 25*4=100. Vilket är en konstant tidskomplexitet. Att söka efter detta ord i en unordered_map ger O(1).
+
+//------------------------------------------------------------------------
+
+- Fundera på vilken data ni lagrar och hur ni vill använda den datan. Använd den informationen för
+    att välja en lämplig datastruktur som är bra på de viktiga operationerna.
+Vi har valt unordered_map då det är låg tidskomplexitet för sökning, vilket passar bra i vårat fall då vi söker efter neighbors ofta.
+
+- Hur många sökningar behöver göras för att hitta ett svar till fråga nummer 2:
+    ”Vilken är den längsta av alla kortaste ordkedjorna som slutar i ord x?” Räcker det med en?
+
+Ja vi kör endast en sökning, vi söker från ordet vi vill hitta till den nod som ligger på längst avstånd.
+
+//------------------------------------------------------------------------
+
+- Vad har er lösning för tidskomplexitet? Finns det några speciella fall då er lösning är bättre eller
+sämre?
+
+BFS: O(V+E)?
+Inläsning: T(n)?
+findNeighbords: O(4*25) == O(1)
+
+Totalt = O(Q * N) 
+    Q = antal frågor
+    N = antal ord
