@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  font-family: "Quicksand";
+  color: #333;
+}
+.navbar {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  border-bottom: 1px solid #f1356d;
+  position: relative;
+}
+
+.navbar h1 {
+  color: #f1356d;
+}
+
+.navbar .links {
+  margin-left: auto;
+}
+
+.navbar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+}
+
+.navbar a:hover {
+  color: #f1356d;
+}
+
+.content {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+#user {
+    position: absolute;
+    left: 40%;
+}
+
+#divBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#messages{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 70%;
+    border-radius: 8px;
+}
+
+.foundUsers {
+    /*display: flex;*/
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+    border-bottom: 2px solid #f1356d;
+    border-right: 2px solid #f1356d;
+    border-radius: 8px;
+}
+
+.foundFriends {
+    /*display: flex;*/
+    flex-direction: row;
+    /*justify-content: flex-end;*/
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-bottom: 2px solid #f1356d;
+    border-left: 2px solid #f1356d;
+    border-radius: 8px;
+}
+
+#friends{
+    width: 15%;
+    position: absolute;
+    top: 400px;
+    left: 4%;
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+}
+
+#searchFriends{
+    width: 10%;
+    position: absolute;
+    top: 400px;
+    right: 4%;
+    display: flex;
+    flex-direction: column;
+    min-height: 200px;
+}
+
+#errorMessage {
+    font-weight: bold;
+    text-align: center;
+    color: red;
+}
+
+#username {
+    width: 50%;
+    border: 1px solid black;
+}
+
+#password {
+    width: 50%;
+    margin-bottom: 1rem;
+    border: 1px solid black;
+    
+}
+
+#outerHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logOut {
+    border: 1px solid black;
+}
+
+#homePage {
+    border: 1px solid black;
+}
+
+#searchButton {
+    border: 1px solid black;
+    height: 3rem;
+}
+
+#searchInput {
+    resize: none;
+    border: 1px solid black;
+    margin-right: 1rem;
+    width: 10rem;
+    height: 3rem;
+    border-radius: 4px;
+}
+
+#userDiv {
+    width: 10%;
+    position: absolute;
+    left: 4%;
+    display: flex;
+    flex-direction: column;
+}
+
+#searchDiv {
+    width: 10%;
+    position: absolute;
+    right: 8%;
+    display: flex;
+    flex-direction: row;
+}
+
+#logInButton {
+    border: 2px solid black;
+    /* margin-bottom: 1rem; */
+}
+#registerButton {
+    border: 2px solid black;
+}
+
+#inputDiv {
+    display: flex;
+    justify-content: center;
+    height: 6rem;
+}
+
+#post {
+    width: 60%;
+    margin-right: 5%;
+    max-width: 30rem;
+    height: 6rem;
+    border: solid;
+    resize: none;
+    border: 1px solid black;
+}
+
+#postButton {
+    width: 20%;
+    border: 1px solid black;
+}
+
+#titleDiv {
+    display: flex;
+    flex-direction: row;
+}
+
+.foundUsers button {
+    border: 2px solid black;
+}
+
+.msg {
+    padding: 1rem;
+    border: 1px solid black;
+    margin-bottom: 2%;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+}
+
+.messageBox {
+    padding: 1rem;
+    margin-top: 2%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+    word-break: break-word;
+    max-height: 10rem;
+    overflow-y: auto; 
+    margin-bottom: 2%;
+    border: 1px solid black;
+    border-radius: 4px;
+}
